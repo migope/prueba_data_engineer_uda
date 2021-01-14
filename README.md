@@ -38,7 +38,7 @@ By combining the *business.json* and *review.json* dataset, can you calculate:
 Depending on the tool you might decide to use, we expect the following deliverables:
 
 - **Short description of the components** of the distributed data processing tool setup you choose.
-- A bootstrap script for **deploying and running the tool in a cloud of your choice**.
+- A bootstrap script for **deploying and running the tool as a container**.
 - **A Git repo** with the source code used to calculate the answers to those questions. We need semantic and small commits along the process. Please, don’t make a single huge commit at the end.
 - **Video, screenshots or any other evidence** of the pipeline running.
 - The results of each question, **one file per question**. Feel free to use the output format you want and explain why you chose it.
