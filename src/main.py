@@ -14,131 +14,15 @@ from  apache_beam.transforms.deduplicate import Deduplicate
 from apache_beam.options.pipeline_options import PipelineOptions
 from apache_beam.options.pipeline_options import SetupOptions
 
-import numpy as np
-
-def select_columns(row):
-    return {
-        'city': row['city'],
-        'state': row['state'],
-        'postal_code': row['postal_code'],
-        'hours_monday': row['hours'].get('Monday', None),
-        'hours_tuesday': row['hours'].get('Tuesday', None),
-        'hours_wednesday': row['hours'].get('Wednesday', None),
-        'hours_thursday': row['hours'].get('Thursday', None),
-        'hours_friday': row['hours'].get('Friday', None),
-        'hours_saturday': row['hours'].get('Saturday', None),
-        'hours_sunday': row['hours'].get('Sunday', None),
-    }
-
-def cast_hours(raw_hour):
-    hour_part, minute_part = raw_hour.split(':')
-    parsed_hour = time(int(hour_part), int(minute_part))
-    return parsed_hour
-
-def parse_hours(row):
-    def split_hour(day_name):
-        try:
-            open_hour, close_hour = row[f'hours_{day_name}'].split('-')
-            #del row[f'hours_{day_name}']
-            row[f'open_hour_{day_name}'] = cast_hours(open_hour)
-            row[f'close_hour_{day_name}'] = cast_hours(close_hour)
-        except:
-            row[f'open_hour_{day_name}'] = None
-            row[f'close_hour_{day_name}'] = None
-    
-    split_hour('monday')
-    split_hour('tuesday')
-    split_hour('wednesday')
-    split_hour('thursday')
-    split_hour('friday')
-    split_hour('saturday')
-    split_hour('sunday')
-    return row
-
-def print_return(row):
-    print(row)
-    return row
-
-def businesses_is_open_past(close_hour):
-    def is_open_past_aux(row, day_name):
-        if (row[f'close_hour_{day_name}'] is  None) or (row[f'open_hour_{day_name}'] is None):
-            return False
-        elif row[f'close_hour_{day_name}'] < row[f'open_hour_{day_name}']:
-            #if the business close the next day
-            return True
-        elif row[f'close_hour_{day_name}'] == time(0,0):
-            #there are some bussiness that close at the change of day
-            return True
-        else: 
-            return row[f'close_hour_{day_name}'] > close_hour
-
-    #use a wapper to be able to declate the hour later
-    def wrap(row):        
-        return is_open_past_aux(row, 'monday')\
-            or is_open_past_aux(row, 'tuesday')\
-            or is_open_past_aux(row, 'wednesday')\
-            or is_open_past_aux(row, 'thursday')\
-            or is_open_past_aux(row, 'friday')\
-            or is_open_past_aux(row, 'saturday')\
-            or is_open_past_aux(row, 'sunday')
-    return wrap
-
-def calculate_open_and_close_time(row):
-    def calculate_open_time_day_aux(open_hour, close_hour):
-        if (close_hour is  None) or (open_hour is None):
-            return timedelta(minutes=0)
-
-        #we need a timedelta to make opetations
-        open_time = timedelta(hours=open_hour.hour,
-                              minutes=open_hour.minute)
-
-        close_time = timedelta(hours=24)\
-            if close_hour == time(0,0)\
-            else timedelta(hours=close_hour.hour,minutes=close_hour.minute)
-            
-        if close_hour < open_hour:
-            #if the business close the next day, hours like 10:00-2:00
-            return close_time + (timedelta(hours=24) - open_time)
-        else:
-            return close_time - open_time
-
-    def calculate_open_time_day(row, day_name):
-        return calculate_open_time_day_aux(row[f'open_hour_{day_name}'], row[f'close_hour_{day_name}'])
-    
-    open_time_week =  calculate_open_time_day(row, 'monday')\
-            + calculate_open_time_day(row, 'tuesday')\
-            + calculate_open_time_day(row, 'wednesday')\
-            + calculate_open_time_day(row, 'thursday')\
-            + calculate_open_time_day(row, 'friday')\
-            + calculate_open_time_day(row, 'saturday')\
-            + calculate_open_time_day(row, 'sunday')
-    row['open_time_week'] = open_time_week
-    row['close_time_week'] = timedelta(days=7) - open_time_week
-    return row
-
-def percentile(percentile):
-    def wrap(values):
-        return np.percentile(list(values) ,percentile)
-    return wrap
-
-def gen_triplet_key(row):
-    return (row['state'] + '/' + row['city'] + '/' + row['postal_code'])
-
-def join_percentiles_remove_dict(row):
-    return (
-        row[0],
-        {
-            'open_p50': row[1]['open_p50'][0],
-            'open_p95': row[1]['open_p95'][0],
-            'close_p50': row[1]['close_p50'][0],
-            'close_p95': row[1]['close_p95'][0]
-        })
+from transformations import select_columns, cast_hours, parse_hours, print_return, businesses_is_open_past, calculate_open_and_close_time, percentile, gen_triplet_key, join_percentiles_remove_dict, decode_json, join_reviews_remove_dict, select_business_most_cool_reviews
 
 def run(argv=None, save_main_session=True):
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--input',
-        dest='input',
+        '--input_businesses',
+        help='Input file to process.')
+    parser.add_argument(
+        '--input_review',
         help='Input file to process.')
     known_args, pipeline_args = parser.parse_known_args(argv)
 
@@ -147,7 +31,7 @@ def run(argv=None, save_main_session=True):
     
     with beam.Pipeline(options=pipeline_options) as p:
 
-        businesses = ( p | 'Read' >> ReadFromText(known_args.input)
+        businesses = ( p | 'Read' >> ReadFromText(known_args.input_businesses)
             | 'parse_json' >> beam.Map(json.loads)
             | 'filter_no_hour' >> beam.Filter(lambda row: 'hours' in row) # remove the business that don't have an hour
             | 'filter_null_hour' >> beam.Filter(lambda row: row['hours'] is not None) # remove the business that have null hours
@@ -181,17 +65,42 @@ def run(argv=None, save_main_session=True):
             'open_p95': businesses_open_time_p95,
             'close_p50': businesses_close_time_p50,
             'close_p95': businesses_close_time_p95} 
-                | beam.CoGroupByKey()
+                | 'join_percentiles' >> beam.CoGroupByKey()
                 | beam.Map(join_percentiles_remove_dict)
                 | beam.Map(print)
         )
         ## The number of businesses that are open past 21:00, by city and state pair.
         ( businesses | 'businesses open past 21:00' >> beam.Filter(businesses_is_open_past(time(21,00)))
             | 'pair_by_city_and_state' >> beam.Map(lambda x: ((x['state'] + '/' + x['city']), 1))
-            | 'count_elements' >> beam.CombinePerKey(sum)
-            | 'print' >> beam.Map(print)
+            | 'count_businesses' >> beam.CombinePerKey(sum)
+            | 'print1' >> beam.Map(print)
         )
 
+
+        ## For each postal code, city, and state triplet, the business with the highest number of “cool” review votes that are not open on Sunday.
+        businesses_no_sundays = (
+            businesses 
+                | 'business_not_opend_sundays' >> beam.Filter(lambda row: row['hours_sunday'] is not None)
+                | 'business_business_id' >> beam.Map(lambda x: (x['business_id'], x) )
+        )
+        reviews = ( p | 'Read_reviews' >> ReadFromText(known_args.input_review)
+            | 'parse_review_json' >> beam.Map(decode_json)
+            | 'filter_wrong_lines' >> beam.Filter(lambda x: x is not None )
+            | 'filter_cool_reviews' >> beam.Filter(lambda x: x['cool'] >0 ) # select "cool" reviews
+            | 'review_business_id' >> beam.Map(lambda x: (x['business_id'], 1) )
+            | 'count_reviews' >> beam.CombinePerKey(sum) # group by business_id and count number of reviews
+        )
+        # join businesses and reviews
+        ({
+            'businesses': businesses_no_sundays,
+            'cool_reviews': reviews
+        } | beam.CoGroupByKey()
+          | 'join_reviews_remove_dict' >> beam.Map(join_reviews_remove_dict)
+          | 'gen_key_city_state_postal_code_reviews' >> beam.Map(lambda x: (gen_triplet_key(x), x)) 
+          | 'select_business_most_cool_reviews' >> beam.CombinePerKey(select_business_most_cool_reviews)
+          | 'print2' >> beam.Map(print)
+        )
+        
 if __name__ == '__main__':
     logging.getLogger().setLevel(logging.INFO)
     run()
