@@ -2,10 +2,23 @@
 import logging
 import json
 from datetime import time, timedelta
+from contextlib import suppress
+
 
 import numpy as np
 
+logger = logging.getLogger(__name__)
 
+def print_row_on_error(func):
+    def wrap(row):
+        try:
+            return func(row)
+        except:
+            logger.error(f'error proces row: {row}')
+            raise
+    return wrap
+
+@print_row_on_error
 def select_columns(row):
     return {
         'business_id': row['business_id'],
@@ -96,8 +109,6 @@ def calculate_open_time_day(row, day_name):
     return calculate_open_time_day_aux(row[f'open_hour_{day_name}'], row[f'close_hour_{day_name}'])
 
 def calculate_open_and_close_time(row):
-
-    
     open_time_week =  calculate_open_time_day(row, 'monday')\
             + calculate_open_time_day(row, 'tuesday')\
             + calculate_open_time_day(row, 'wednesday')\
@@ -114,33 +125,40 @@ def percentile(percentile):
         return np.percentile(list(values) ,percentile)
     return wrapper
 
+@print_row_on_error
 def gen_triplet_key (row):
     return (row['state'] + '/' + row['city'] + '/' + row['postal_code'])
 
+def deconstruc_tiplet_key(key):
+    return key.split('/') # tuple with (state, city, postal_code)
+    
+
 def join_percentiles_remove_dict(row):
-    return (
-        row[0],
-        {
+    state, city, postal_code  = deconstruc_tiplet_key(row[0])
+    return{
+            'state': state,
+            'city': city,
+            'postal_code': postal_code,
             'open_p50': row[1]['open_p50'][0],
             'open_p95': row[1]['open_p95'][0],
             'close_p50': row[1]['close_p50'][0],
             'close_p95': row[1]['close_p95'][0]
-        })
+        }
 
 def decode_json(row):
-    try:
+    with suppress(ValueError), suppress(json.decoder.JSONDecodeError):
         json_object = json.loads(row)
-    except ValueError as e:
-        print(e)
-        return None
-    except json.decoder.JSONDecodeError as e:
-        print(e)
-        return None
-    return json_object
+        return json_object
+    logger.warning(f'can not decode row {row}')
+    return None
 
 def join_reviews_remove_dict(row):
     num_cool_reviews = row[1]['cool_reviews'][0] if len(row[1]['cool_reviews'])>0 else 0
-    return dict(row[1]['businesses'][0], cool_reviews=num_cool_reviews)
+    if len(row[1]['businesses'])>0:
+        #if after do the join we have reviews but no business
+        return dict(row[1]['businesses'][0], cool_reviews=num_cool_reviews)
+    else:
+        None
 
 def select_business_most_cool_reviews(businesses):
     business_most_cool_reviews = {'cool_reviews': -1} #negative to set a real value at the firt iteration of the loop
@@ -148,3 +166,20 @@ def select_business_most_cool_reviews(businesses):
         if buisness['cool_reviews'] > business_most_cool_reviews['cool_reviews']:
             business_most_cool_reviews = buisness
     return business_most_cool_reviews
+
+def format_to_write_business_count(delimiter):
+    @print_row_on_error
+    def wrap(row):
+        state, city = row[0].split('/')
+        count = row[1]
+        return delimiter.join((state, city, str(count)))
+    return wrap
+
+def format_output(columns, delimiter):
+    """convert a dict to a csv row """
+    def wrap(row):
+        output = []
+        for colum in columns:
+            output.append(str(row[colum]))
+        return delimiter.join(output)
+    return wrap

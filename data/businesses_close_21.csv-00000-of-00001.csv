@@ -1,0 +1,826 @@
+state;city;count
+AZ;Mesa;2047
+ON;Toronto;7667
+WI;Middleton;137
+AZ;Glendale;1192
+NC;Gastonia;229
+ON;Aurora;130
+NC;Charlotte;3731
+ON;Richmond Hill;491
+QC;Lasalle;39
+NV;Las Vegas;11711
+QC;Montréal;3138
+OH;Cleveland;1412
+AZ;Phoenix;6231
+PA;Plum;11
+ON;Scarborough;421
+PA;Pittsburgh;2832
+AB;Calgary;2796
+OH;Rocky River;91
+ON;Milton;5
+AZ;Tempe;1678
+AZ;Scottsdale;2844
+AZ;Chandler;1462
+OH;Fairview Park;45
+AZ;Gilbert;1238
+PA;Avalon;5
+ON;East York;48
+WI;Cottage Grove;19
+PA;Gibsonia;53
+ON;Mississauga;1415
+ON;Brampton;505
+SC;Fort Mill;239
+WI;Madison;1417
+OH;Westlake;168
+NC;Cornelius;175
+AZ;Goodyear;317
+OH;Streetsboro;62
+AZ;Surprise;404
+ON;Markham;736
+OH;Lakewood;226
+NV;North Las Vegas;615
+SC;Rock Hill;126
+OH;Strongsville;170
+QC;Westmount;37
+IL;Champaign;517
+PA;Carnegie;45
+OH;Parma Heights;33
+IL;Urbana;144
+PA;Coraopolis;67
+OH;Chardon;41
+NC;Concord;361
+NC;Harrisburg;52
+OH;Hudson;72
+OH;Parma;150
+NV;Henderson;1646
+ON;North York;421
+WI;Stoughton;42
+WI;Oregon;26
+OH;Chagrin Falls;68
+ON;Etobicoke;272
+QC;Saint-Laurent;66
+OH;Pepper Pike;7
+NC;Huntersville;230
+AZ;Avondale;270
+OH;North Olmsted;161
+QC;Longueuil;45
+OH;Twinsburg;55
+OH;Beachwood;108
+QC;Rosemere;3
+OH;Willoughby;119
+WI;Fitchburg;92
+OH;Shaker Heights;33
+WI;Waunakee;44
+AZ;Peoria;707
+OH;Willowick;29
+QC;Montreal-Nord;3
+QC;Laval;228
+QC;Outremont;16
+NC;Pineville;107
+ON;Vaughan;453
+OH;Elyria;104
+OH;Brunswick;79
+ON;Pickering;140
+NC;Matthews;274
+WI;Mc Farland;10
+ON;Bradford;16
+OH;Mentor On The Lake;6
+QC;Boisbriand;12
+WI;De Forest;13
+OH;Avon;113
+AZ;Tolleson;65
+QC;Pierrefonds;27
+ON;Whitby;143
+OH;Bedford;31
+AB;Rocky View;4
+OH;South Euclid;35
+OH;Bedford Heights;11
+AZ;Laveen Village;5
+NC;Mint Hill;45
+OH;Stow;117
+OH;Warrensville Heights;27
+OH;Mentor;205
+NC;Belmont;77
+ON;Thornhill;181
+OH;Mayfield Heights;77
+OH;Macedonia;53
+OH;Northfield;51
+OH;Middleburg Heights;76
+OH;Brecksville;39
+ON;East Mississauga;2
+QC;Pointe-Claire;42
+AZ;Cave Creek;126
+ON;Stouffville;32
+NV;Boulder City;73
+PA;New Kensington;31
+OH;Painesville;72
+PA;Monroeville;169
+NC;Indian Trail;116
+PA;Bridgeville;88
+QC;Saint-Constant;4
+IL;Tolono;2
+QC;Brossard;109
+NC;Denver;51
+PA;Bethel Park;89
+OH;LaGrange;2
+NC;Kannapolis;48
+PA;Homestead;48
+PA;North Huntingdon;13
+OH;Solon;81
+ON;Maple;26
+OH;Cleveland Heights;107
+WI;Monona;53
+OH;Broadview Heights;54
+OH;Maple Heights;20
+OH;Akron;226
+PA;West Elizabeth;2
+ON;Oakville;177
+PA;Munhall;13
+OH;Independence;66
+ON;East Gwillimburry;1
+PA;East Liberty;3
+AB;Airdrie;70
+OH;Grafton;6
+PA;West Mifflin;65
+NC;Davidson;46
+OH;Fairlawn;55
+OH;Kent;126
+PA;Wexford;90
+PA;Bellevue;19
+OH;Richfield;18
+PA;Arnold;2
+ON;Ajax;132
+NC;Waxhaw;59
+OH;Avon Lake;56
+OH;Berea;49
+OH;Medina;140
+QC;Saint-Jean-sur-Richelieu;15
+ON;Newmarket;152
+WI;Sun Prairie;105
+QC;Dorval;42
+QC;Dollard-des-Ormeaux;48
+ON;Woodbridge;93
+PA;Oakmont;16
+OH;Copley;23
+OH;Brook Park;28
+OH;Wickliffe;36
+AZ;Youngtown;24
+PA;Cheswick;9
+AZ;Buckeye;26
+PA;Sewickley;35
+PA;Murrysville;38
+ON;King City;16
+PA;Canonsburg;59
+ON;Georgetown;18
+QC;Dollard-Des-Ormeaux;10
+WI;Verona;50
+OH;Olmsted Falls;20
+AZ;Sun City;65
+IL;Savoy;33
+AZ;Carefree;26
+WI;DeForest;6
+OH;Cuyahoga Falls;157
+QC;Montréal-West;1
+NC;Monroe;75
+PA;Pleasant Hills;19
+OH;North Royalton;62
+AZ;Laveen;61
+OH;Chesterland;26
+QC;Saint-Sauveur;30
+NC;Stanley;11
+AZ;Litchfield Park;80
+QC;Montreal;83
+PA;Irwin;28
+OH;Highland Heights;21
+OH;Chargrin Falls;1
+OH;Amherst;51
+PA;Cuddy;1
+TX;Dallas;2
+OH;North Randall;6
+ON;East Gwillimbury;16
+OH;Mayfield Hts;1
+QC;Repentigny;7
+OH;Brooklyn;48
+AZ;Anthem;10
+IL;Mahomet;18
+QC;Sainte-Anne-de-Bellevue;10
+WI;Windsor;8
+QC;Greenfield Park;14
+IL;Rantoul;22
+PA;Finleyville;9
+QC;Châteauguay;7
+AZ;Sun Lakes;12
+WI;Mount Horeb;22
+OH;Euclid;45
+NC;Dallas;15
+OH;Lorain;51
+QC;Terrebonne;13
+OH;Moreland Hills;5
+SC;Ft. Mill;1
+QC;Sainte-Adèle;6
+PA;Moon Township;27
+AB;Beltline;1
+SC;Indian Land;48
+QC;Prévost;3
+ON;Concord;46
+PA;Mount Lebanon;9
+PA;Castle Shannon;5
+PA;Verona;26
+QC;Chambly;3
+OH;Mentor-on-the-Lake;8
+AZ;Queen Creek;35
+OH;Middlefield;10
+OH;Kirtland;10
+OH;Middleburg Hts;5
+QC;Montréal-Ouest;1
+PA;Clairton;5
+PA;Pennsylvania;1
+PA;Sharpsburg;5
+IL;Villa Grove;1
+PA;North Versailles;28
+AZ;El Mirage;36
+PA;Port Vue;1
+PA;Shadyside;1
+PA;Venetia;3
+QC;Mont-Royal;12
+WI;Berry;1
+ON;York;25
+NC;Ballantyne;1
+SC;Clover;20
+OH;Mayfield Village;5
+SC;York;1
+PA;West View;6
+AZ;Red Mountain;1
+ON;East Gwilimbury;1
+PA;McKeesport;22
+ON;North Toronto;1
+NC;Midland;6
+OH;Mentor ohio;1
+PA;Belle Vernon;2
+NC;Mount Holly;14
+PA;Robinson Township;7
+ON;Bolton;29
+PA;South Park;6
+QC;Beloeil;6
+QC;Sainte-Adele;3
+QC;L'ile-Perrot;3
+QC;Boucherville;18
+OH;Seven Hills;16
+OH;University Heights;26
+OH;Eastlake;30
+PA;Mckees Rocks;13
+ON;Caledon;12
+PA;Elrama;1
+QC;Ormstown;2
+OH;Aurora;63
+OH;Mayfield;5
+QC;Saint-Jerome;5
+NV;LAS VEGAS;5
+ON;Whitchurch-Stouffville;17
+PA;Heidelberg;6
+QC;Beauharnois;1
+PA;Tarentum;29
+AZ;Fountain Hills;96
+QC;Saint-Jérôme;12
+OH;Woodmere;25
+OH;Peninsula;9
+QC;Lachine;21
+PA;Wilkinsburg;6
+PA;McKees Rocks;25
+ON;Willowdale;4
+PA;Millvale;9
+QC;Charlemagne;1
+QC;Vaudreuil-Dorion;40
+QC;Verdun;71
+WI;Sauk City;2
+OH;Garfield Heights;21
+IL;Saint Joseph;5
+AZ;Paradise Valley;28
+QC;Saint-Sauveur-Des-Monts;1
+OH;Bay Village;17
+PA;Blawnox;2
+QC;L'Île-Perrot;7
+PA;Crafton;6
+QC;La Prairie;12
+PA;Turtle Creek;12
+PA;Allison Park;32
+PA;McMurray;45
+CO;Centennial;1
+PA;White Oak;16
+NV;Las vegas;8
+PA;Imperial;8
+PA;Swissvale;4
+OH;Ravenna;5
+PA;Springdale;6
+WI;McFarland;9
+PA;Harrison City;4
+PA;Ambridge;15
+AB;Chestermere;14
+OH;Valley View;12
+OH;Orange Village;9
+NC;Stallings;8
+NC;Mooresville;17
+PA;Lower Burrell;8
+OH;East Cleveland;5
+PA;Pittsburg;4
+ON;Port Credit;2
+PA;Oakdale;17
+PA;Hampton Township;7
+QC;Saint-Hubert;15
+SC;Tega Cay;13
+OH;Hinckley;6
+WI;Belleville;8
+PA;Mt Lebanon;2
+OH;Sheffield Lake;6
+QC;Saint-Lambert;13
+OH;Norton;7
+WI;Marshall;2
+OH;Highland Hts;1
+PA;Mcknight;1
+OH;Sheffield Village;16
+QC;St-Bruno-de-Montarville;1
+OH;Gates Mills;3
+AZ;Cave creek;1
+PA;Moon;7
+ON;Halton Hills;9
+ON;Bradford West Gwillimbury;10
+AZ;phoenix;4
+NC;Wesley Chapel;14
+ON;Holland Landing;1
+PA;Sturgeon;1
+OH;Tallmadge;20
+QC;Rosemère;9
+OH;Bainbridge;2
+QC;LaSalle;9
+OH;Lyndhurst;48
+NV;Paradise;5
+OH;Munroe Falls;6
+PA;Penn Hills;19
+QC;Anjou;9
+OH;Cuyohoga Falls;1
+QC;Saint-Bruno;1
+OH;Olmsted Township;4
+PA;Mc Murray;3
+SC;Charlotte;2
+OH;Northfield Center;4
+PA;Mcmurray;6
+AZ;PHOENIX AP;1
+QC;Île-Perrot;1
+QC;Chomedey, Laval;1
+ON;Brooklin;4
+QC;Kirkland;24
+SC;Lake Wylie;35
+OH;North Ridgeville;47
+PA;Forest Hills;4
+QC;Kahnawake;4
+NC;Locust;9
+NC;University;1
+QC;Dollard-Des Ormeaux;2
+BC;Markham;1
+PA;Glenshaw;18
+PA;Midway;1
+AZ;Fort McDowell;2
+ON;Unionville;26
+QC;Greenfield-Park;1
+OH;Auburn Twp;1
+PA;Trafford;6
+QC;Dollard-des Ormeaux;5
+PA;Elizabeth Township;1
+OH;Willoughby Hills;13
+QC;Montral;1
+ON;Don Mills;1
+OH;S.Euclid;1
+PA;Aspinwall;9
+PA;Export;1
+PA;Etna;7
+PA;McKnight;1
+ON;Nobleton;3
+ON;Malton;3
+PA;Cecil;1
+QC;Oka;2
+OH;lyndhurst;1
+PA;Bellvue;1
+OH;Grand River;2
+SC;Fort mill;1
+PA;Dormont;5
+QC;Mont-Saint-Hilaire;3
+NC;Weddington;6
+PA;Mckeesport;2
+PA;Braddock;3
+OH;Valley City;3
+PA;West Homestead;11
+PA;East Pittsburgh;2
+OH;Cleveland Hts.;1
+OH;Wadsworth;16
+OH;Richmond Heights;12
+PA;Edgewood;2
+OH;Highland Hills;1
+AZ;San Diego;1
+AZ;Ahwatukee;2
+OH;Sagamore Hills;4
+ON;Schomberg;5
+AZ;Pheonix;1
+AZ;Cave Creek Road;1
+QC;Hudson;7
+NY;Champlain;4
+OH;Newbury;5
+OH;Montville;1
+OH;Walton Hills;3
+NC;Lowell;6
+AZ;Phoenix ;1
+QC;Sainte-Julie;8
+NV;HENDERSON;1
+OH;Bainbridge Township;1
+PA;Brentwood;6
+PA;Leetsdale;7
+PA;East Mc Keesport;2
+QC;Piedmont;2
+IL;Monticello;14
+AZ;Waddell;1
+NV;N Las Vegas;9
+IL;Tuscola;1
+ON;Kleinburg;4
+PA;Elizabeth;13
+PA;East McKeesport;3
+QC;Saint-Eustache;9
+OH;Burton;12
+QC;St-Jerome;3
+AZ;Sun City West;22
+QC;Saint-Hyacinthe;6
+CA;Glendale;1
+QC;Fabreville;1
+OH;Litchfield;2
+WI;Madison East;1
+OH;Parma Hts.;1
+PA;McCandless Township;4
+PA;Mt. Lebanon;4
+WI;Deforest;3
+PA;Pitcairn;3
+OH;Richmond Height;1
+PA;PITTSBURGH;1
+AB;Southeast Calgary;1
+ON;Downsview;2
+OH;Mayfield Heights (Cleveland);1
+QC;Saint-Lazare;3
+PA;Upper St. Clair;4
+UT;Draper;1
+OH;Concord;6
+NV;Nellis Air Force Base;2
+NC;CHARLOTTE;1
+ON;Mount Albert;3
+QC;Sainte-Anne-De-Bellevue;3
+QC;Montéal;1
+AZ;SCOTTSDALE;1
+QC;Mirabel;3
+ON;toronto;1
+OH;Cuyahoga Heights;2
+NV;City Center;1
+AZ;Desert Ridge;1
+WA;Canonsburg;1
+PA;Upper Saint Clair;7
+QC;Vaudreuil;2
+QC;L'Assomption;2
+PA;Library;3
+ON;Toronto Division;1
+AZ;Guadalupe;8
+IL;Thomasboro;2
+NC;Cramerton;4
+QC;Saint-Bernard-de-Lacolle;2
+PA;Monongahela;10
+WI;Cross Plains;11
+OH;Oakwood Village;7
+NV;South Las Vegas;2
+QC;Côte Saint-Luc;3
+WI;Madison West;1
+OH;Oberlin;1
+WA;Kirkland;1
+AZ;Apache Junction;7
+QC;Saint Leonard;1
+NV;Nellis Afb;1
+AZ;Metro Phoenix;1
+ON;OAKVILLE;1
+QC;Cote Saint-Luc;2
+ON;Whiitby;1
+OH;Middleburg;1
+PA;Moon Twp;2
+PA;Creighton;3
+ON;Etobiicoke;2
+QC;Pont-Viau;1
+PA;N Versailles;1
+OH;Perry;5
+WI;Black Earth;1
+PA;Robinson;3
+SC;Fort Mills;1
+QC;Delson;4
+QC;Saint-Leonard;6
+ON;Waterloo;1
+ON;Tornto;1
+QC;Beaconsfield;6
+QC;Salaberry-de-Valleyfield;2
+QC;Cote-Saint-Luc;1
+OH;N Ridgeville;1
+PA;Brookline;1
+PA;W.Mifflin;1
+OH;Orange;6
+IL;Joliet;1
+OH;Brookpark;10
+QC;Sainte- Adele;1
+NC;charlotte;3
+AZ;Higley;2
+ON;Uxbridge;4
+OH;Cleveland, OH;1
+QC;Sainte-Thérèse;8
+AZ;North Scottsdale;1
+OH;Columbia Station;4
+NV;N. Las Vegas;5
+OH;Woodmere Village;2
+AL;Chandler;1
+NC;Fort Mill;1
+PA;Mc Donald;3
+FL;Cleveland;1
+PA;Wilmerding;4
+PA;Jefferson Hills;5
+IL;St Joseph;1
+ON;Northyork;1
+QC;Montréal-Nord;3
+QC;Saint-Léonard;5
+PA;Upper St Clair;3
+ON;Gormley;1
+QC;Blainville;6
+QC;Ville Mont-Royal;1
+QC;Quartier des Spectacles;1
+AZ;PHOENIX;1
+ON;King;2
+PA;Harmarville;3
+ON;West Toronto;1
+OH;Wellington;1
+OH;N.Ridgeville;1
+QC;St-Leonard;3
+NV;Blue Diamond;1
+AZ;Mesa Arizona;1
+IL;Fisher;1
+PA;Rankin;2
+PA;Mc Kees Rocks;6
+NV;LAS VEGAS AP;1
+QC;Candiac;4
+OH;North Olmstead;2
+QC;Saint-Isidore-de-Laprairie;1
+ON;Oakridges;1
+NV;las Vegas;3
+QC;Ste-Dorothée;1
+QC;Saintt-Bruno-de-Montarville;1
+QC;Saint-Basile-Le-Grand;1
+OH;Maple Hts.;1
+AB;Edmonton;1
+NV;Spring Valley;4
+PA;Peters (Township Of);1
+AZ;glendale;1
+OH;Fairport Harbor;4
+AZ;Sun CIty;1
+OH;Austinburg;1
+TX;Charlotte;1
+ON;ETOBICOKE;1
+AZ;Gelndale;1
+NC;Mt. Holly;1
+NC;Blakeney;1
+PA;Neville Island;1
+PA;McDonald;3
+AR;Avondale;1
+PA;Saxonburg;1
+OH;Mayfield Hts.;2
+ON;Ashburn;1
+NC;North Charlotte;1
+NV;Summerlin;6
+QC;Sainte-Therese;1
+ON;Richmond Hil;1
+QC;Saint-Liboire;1
+NV;Nellis AFB;1
+OH;Troy Township;1
+ON;Queen West;1
+ON;Toronto-West;1
+PA;Morgan;1
+QC;Sainte-Catherine;3
+PA;Plum Boro;1
+NC;Mathews;1
+HI;Wahiawa;1
+IL;Mansfield;1
+OH;Mantua;5
+AZ;Peoria,;1
+QC;Montrèal;1
+ON;Scarobrough;1
+IL;Ogden;2
+CA;Gilbert;1
+NV;Las  Vegas;3
+WI;Lodi;1
+QC;Morin-Heights;2
+OH;Concord Township;2
+PA;Lower Lawrenceville;1
+QC;Lachenaie;2
+OR;Salem;1
+CA;Antioch;1
+PA;Glassport;3
+QC;De l'Eglise;1
+NV;N E Las Vegas;1
+QC;Saint - Hyacinthe;1
+QC;Chateauguay;1
+OH;Geauga;1
+PA;Indianola;1
+QC;St-Jean Sur Richelieu;1
+ON;Sharon;1
+PA;Whitehall;1
+NC;South Charlotte;1
+QC;Mercier;1
+PA;Squirrel Hill;1
+OH;N. Ridgeville;1
+QC;Mont-Saint-Grégoire;3
+WI;Reedsburg;1
+NV;San Antonio;1
+PA;pittsbuirgh;1
+OH;Bratenahl;3
+PA;Kennedy Township;2
+AZ;Arizona;1
+PA;McKeesRocks;1
+QC;Québec;1
+QC;Bois-des-Filion;2
+QC;Saint-Bruno-de-Montarville;2
+BC;Richmond Hill;1
+PA;Lower burrell;1
+SC;Ft.Mill;1
+ON;Rexdale;5
+NC;McAdenville;3
+AZ;San Tan Valley;1
+NC;Indian land;1
+OH;Cleveland Heigh;1
+WI;Sheboygan;1
+PA;Bloomfield;1
+CO;Macedonia;1
+PA;Pittsburgh ;1
+AZ;mesa;1
+ON;Thornhil;1
+QC;Pointe Claire;2
+OH;Montrose;2
+QC;Varennes;1
+WA;Puyallup;1
+QC;Chatauguay;1
+ON;River Drive Park;1
+TX;Phoenix;1
+QC;St-Sauveur;1
+QC;Mascouche;3
+PA;Dravosburg;3
+QC;Havelock;1
+QC;L'Île-des-Sœurs;1
+OH;Medina Township;1
+ON;Beeton;3
+OH;Sheffield;5
+PA;Franklin Park;2
+QC;Val-Morin;1
+IL;Chicago;1
+CA;Lemon Grove;1
+QC;La Salle;3
+PA;New Eagle;2
+NV;las vegas;2
+QC;Joliette;3
+QC;Ville Saint Laurent;1
+AZ;MESA;2
+WI;Shorewood Hills;1
+QC;Mount Royal;1
+NY;Mooers;1
+TX;Frisco;1
+ON;Etibicoke;1
+AZ;Valleywide;1
+QC;Sainte-Geneviève;1
+PA;Harmar Township;1
+GA;East Point;1
+OH;Cleveland ;1
+OH;Bath;2
+NC;Concord Mills;2
+OH;N.Olmsted;1
+QC;Vimont;1
+QC;St. Léonard;1
+OH;Lagrange;3
+QC;Rawdon;1
+WI;Mcfarland;2
+VA;Hopewell;1
+QC;Pincourt;1
+PA;Lawrenceville;4
+AZ;Phoenix Metro Area;1
+ON;Oshawa;1
+ON;Regional Municipality of York;1
+ON;Ontario;1
+ON;Weston;1
+ON;Downtown Toronto;3
+PA;Wildwood;1
+NC;Crouse;1
+WI;Dane;5
+PA;McCandless;1
+AZ;Scottdale;1
+NV;Black Rock City;1
+QC;West Montréal;1
+NV;Seven Hills;1
+OH;Toronto;1
+QC;Napierville;1
+OH;south Euclid;1
+OH;Richmond Hts;2
+QC;St. Jean Sur Richelieu;1
+ON;Clarkson;2
+PA;Murrysville (Monroeville);1
+ON;Tottenham;1
+ON;Zephyr;1
+AZ;laveen;1
+IL;Sidney;1
+PA;Ross Township;2
+AB;Sage Hill;1
+PA;Pine;1
+PA;Hazelwood;1
+AZ;North Phoenix;1
+AB;Midnapore;1
+PA;N.Versailles;1
+ON;Glen Williams;1
+PA;Rural Ridge;1
+ON;Mississuaga;1
+OH;Richmond Hts.;1
+AZ;Arrowhead;1
+PA;North strabane;1
+NV;4321 W Flamingo Rd;1
+OH;Lindale;1
+PA;Duquesne;3
+OH;Boston Heights;1
+PA;Wilkins;1
+IL;Philo;1
+QC;L'assomption;1
+QC;Duvernay;1
+NV;Enterprise;2
+OH;Erie;1
+NV;Las Vegas ;1
+PA;Regent Square;1
+ON;Caledon East;1
+OH;Bedford Hts;1
+CA;Oakland;1
+OH;Olmsted Twp;1
+IL;St. Joseph;1
+ON;Oak Ridges;1
+NY;Brooklyn;1
+PA;Peters Township;1
+PA;Sutersville;1
+AB;Rockey View;1
+OH;Northfield Center Township;1
+CT;Glendale;1
+NC;Lake Park;1
+QC;Valleyfield;1
+NV;N.Las Vegas;1
+QC;Sainte-thérèse;1
+NC;Charlotte ;1
+PA;Fox Chapel;1
+ON;Mississaugua;1
+PA;Robinson Twp.;1
+ON;Streetsville;1
+AB;North York;1
+OH;Garfield Hts;1
+OH;Brooklyn Heights;1
+OH;Cuyahoga Fls;1
+PA;North Huntington;1
+QC;Baie-d'Urfe;1
+ON;Richmonhill;1
+PA;Cranberry Twp;1
+QC;Sainte-Rose;1
+MO;Springfield;1
+PA;Harrisburg;1
+PA;Baldwin;2
+OH;Hiram;1
+ON;Missisauga;1
+PA;Emsworth;1
+OH;Oakwood;1
+AB;Balzac;2
+TX;Lufkin;1
+PA;South Park Township;1
+QC;Rigaud;2
+QC;Baie-d'Urfé;1
+OH;Garfield Hts.;1
+PA;Hendersonville;1
+PA;Shaler Township;1
+OH;Newbury Township;1
+CA;San Diego;1
+QC;Bedford;1
+PA;Las Vegas;1
+ON;Agincourt;1
+QC;Sainte-Thérèse-de-Blainville;2
+PA;North Strabane Township;1
+QC;Laval, Pont Viau;1
+OH;Novelty;1
+QC;Le Sud-Ouest;1
+QC;Saint-Henri;1
+OH;Middleburg Hts.;1
+PA;Herminie;1
+PA;Whitaker;1
+OH;Tremont;1
+OH;CLEVELAND AP;1
+QC;Sainte-Marthe;1
+AZ;Scottsdsale;1
+NC;Marvin;1
+ON;oakville;1
+WI;Deerfield;1
+OH;Brunswick Hills;1
+PA;Crescent;1
+NV;henderson;1
+QC;Montreal-Ouest;1
+AZ;Chander;1

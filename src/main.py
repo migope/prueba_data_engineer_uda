@@ -14,8 +14,16 @@ from  apache_beam.transforms.deduplicate import Deduplicate
 from apache_beam.options.pipeline_options import PipelineOptions
 from apache_beam.options.pipeline_options import SetupOptions
 
-from transformations import select_columns, cast_hours, parse_hours, print_return, businesses_is_open_past, calculate_open_and_close_time, percentile, gen_triplet_key, join_percentiles_remove_dict, decode_json, join_reviews_remove_dict, select_business_most_cool_reviews
+from transformations import select_columns, cast_hours, parse_hours, businesses_is_open_past
+from transformations import calculate_open_and_close_time, percentile, gen_triplet_key
+from transformations import join_percentiles_remove_dict, decode_json, join_reviews_remove_dict
+from transformations import select_business_most_cool_reviews, format_output, format_to_write_business_count
 
+
+businesses_percentile_out_columns = ['state', 'city', 'postal_code', 'open_p50', 'open_p95', 'close_p50', 'close_p95']
+businesses_close_past_21_columns = ['state', 'city', 'count']
+businesses_reviews_out_columns = ['state','city','postal_code','business_id','cool_reviews']
+out_delimiter = ';'
 def run(argv=None, save_main_session=True):
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -23,6 +31,15 @@ def run(argv=None, save_main_session=True):
         help='Input file to process.')
     parser.add_argument(
         '--input_review',
+        help='Input file to process.')
+    parser.add_argument(
+        '--output_business_percentiles_prefix',
+        help='Input file to process.')
+    parser.add_argument(
+        '--output_close_business_prefix',
+        help='Input file to process.')
+    parser.add_argument(
+        '--output_business_cool_reviews_prefix',
         help='Input file to process.')
     known_args, pipeline_args = parser.parse_known_args(argv)
 
@@ -32,11 +49,11 @@ def run(argv=None, save_main_session=True):
     with beam.Pipeline(options=pipeline_options) as p:
 
         businesses = ( p | 'Read' >> ReadFromText(known_args.input_businesses)
-            | 'parse_json' >> beam.Map(json.loads)
+            | 'parse_json' >> beam.Map(decode_json)
+            | 'filter_businesses_wrong_lines' >> beam.Filter(lambda x: x is not None )
             | 'filter_no_hour' >> beam.Filter(lambda row: 'hours' in row) # remove the business that don't have an hour
             | 'filter_null_hour' >> beam.Filter(lambda row: row['hours'] is not None) # remove the business that have null hours
             | 'select_columns' >> beam.Map(select_columns) # select only the fields that we need
-            #| 'print_return' >> beam.Map(print_return)
             | 'parse_hours' >> beam.Map(parse_hours)
             | 'calculate_open_and_close_time' >> beam.Map(calculate_open_and_close_time)
 
@@ -66,14 +83,20 @@ def run(argv=None, save_main_session=True):
             'close_p50': businesses_close_time_p50,
             'close_p95': businesses_close_time_p95} 
                 | 'join_percentiles' >> beam.CoGroupByKey()
-                | beam.Map(join_percentiles_remove_dict)
-                | beam.Map(print)
+                | 'join_percentiles_remove_dict' >> beam.Map(join_percentiles_remove_dict)
+                | 'format_to_write_percentiles' >> beam.Map(format_output(businesses_percentile_out_columns, out_delimiter))
+                | 'Write_business_percentiles' >> WriteToText(known_args.output_business_percentiles_prefix,
+                                                              file_name_suffix='.csv',
+                                                              header=out_delimiter.join(businesses_percentile_out_columns)) #the output is on seconds
         )
         ## The number of businesses that are open past 21:00, by city and state pair.
         ( businesses | 'businesses open past 21:00' >> beam.Filter(businesses_is_open_past(time(21,00)))
             | 'pair_by_city_and_state' >> beam.Map(lambda x: ((x['state'] + '/' + x['city']), 1))
             | 'count_businesses' >> beam.CombinePerKey(sum)
-            | 'print1' >> beam.Map(print)
+            | 'format_to_write_business_count' >> beam.Map(format_to_write_business_count(out_delimiter) )
+            | 'write_business_open_past_21' >> WriteToText(known_args.output_close_business_prefix,
+                                                          file_name_suffix='.csv',
+                                                          header=out_delimiter.join(businesses_close_past_21_columns))
         )
 
 
@@ -85,7 +108,7 @@ def run(argv=None, save_main_session=True):
         )
         reviews = ( p | 'Read_reviews' >> ReadFromText(known_args.input_review)
             | 'parse_review_json' >> beam.Map(decode_json)
-            | 'filter_wrong_lines' >> beam.Filter(lambda x: x is not None )
+            | 'filter_reviews_wrong_lines' >> beam.Filter(lambda x: x is not None )
             | 'filter_cool_reviews' >> beam.Filter(lambda x: x['cool'] >0 ) # select "cool" reviews
             | 'review_business_id' >> beam.Map(lambda x: (x['business_id'], 1) )
             | 'count_reviews' >> beam.CombinePerKey(sum) # group by business_id and count number of reviews
@@ -96,9 +119,14 @@ def run(argv=None, save_main_session=True):
             'cool_reviews': reviews
         } | beam.CoGroupByKey()
           | 'join_reviews_remove_dict' >> beam.Map(join_reviews_remove_dict)
+          | 'remove_reviews_no_business' >> beam.Filter(lambda x: x is not None )
           | 'gen_key_city_state_postal_code_reviews' >> beam.Map(lambda x: (gen_triplet_key(x), x)) 
           | 'select_business_most_cool_reviews' >> beam.CombinePerKey(select_business_most_cool_reviews)
-          | 'print2' >> beam.Map(print)
+          | 'remove_key_busisness_cool_reviews' >> beam.Map(lambda x: x[1])
+          | 'format_to_write_business_cool_reviews' >> beam.Map(format_output(businesses_reviews_out_columns, out_delimiter))
+          | 'write_business_cool_reviews' >> WriteToText(known_args.output_business_cool_reviews_prefix,
+                                                        file_name_suffix='.csv',
+                                                        header=out_delimiter.join(businesses_reviews_out_columns))
         )
         
 if __name__ == '__main__':
