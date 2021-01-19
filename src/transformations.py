@@ -99,7 +99,7 @@ def calculate_open_time_day_aux(open_hour, close_hour):
         if close_hour == time(0,0)\
         else timedelta(hours=close_hour.hour,minutes=close_hour.minute)
         
-    if close_hour < open_hour:
+    if (close_hour < open_hour) and close_hour != time(0,0):
         #if the business close the next day, hours like 10:00-2:00
         return close_time + (timedelta(hours=24) - open_time)
     else:
@@ -122,7 +122,7 @@ def calculate_open_and_close_time(row):
 
 def percentile(percentile):
     def wrapper(values):
-        return np.percentile(list(values) ,percentile)
+        return int(np.percentile(list(values) ,percentile))
     return wrapper
 
 @print_row_on_error
@@ -149,7 +149,7 @@ def decode_json(row):
     with suppress(ValueError), suppress(json.decoder.JSONDecodeError):
         json_object = json.loads(row)
         return json_object
-    logger.warning(f'can not decode row {row}')
+    logger.warning(f'can not decode row: {row}')
     return None
 
 def join_reviews_remove_dict(row):

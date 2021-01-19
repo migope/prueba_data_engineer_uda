@@ -1,16 +1,11 @@
-from __future__ import absolute_import
-
 import argparse
 import logging
 import json
 from datetime import time, timedelta
 
-from past.builtins import unicode
-
 import apache_beam as beam
 from apache_beam.io import ReadFromText
 from apache_beam.io import WriteToText
-from  apache_beam.transforms.deduplicate import Deduplicate
 from apache_beam.options.pipeline_options import PipelineOptions
 from apache_beam.options.pipeline_options import SetupOptions
 
@@ -24,6 +19,7 @@ businesses_percentile_out_columns = ['state', 'city', 'postal_code', 'open_p50',
 businesses_close_past_21_columns = ['state', 'city', 'count']
 businesses_reviews_out_columns = ['state','city','postal_code','business_id','cool_reviews']
 out_delimiter = ';'
+
 def run(argv=None, save_main_session=True):
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -103,7 +99,7 @@ def run(argv=None, save_main_session=True):
         ## For each postal code, city, and state triplet, the business with the highest number of “cool” review votes that are not open on Sunday.
         businesses_no_sundays = (
             businesses 
-                | 'business_not_opend_sundays' >> beam.Filter(lambda row: row['hours_sunday'] is not None)
+                | 'business_not_opend_sundays' >> beam.Filter(lambda row: row['hours_sunday'] is None)
                 | 'business_business_id' >> beam.Map(lambda x: (x['business_id'], x) )
         )
         reviews = ( p | 'Read_reviews' >> ReadFromText(known_args.input_review)
@@ -117,7 +113,7 @@ def run(argv=None, save_main_session=True):
         ({
             'businesses': businesses_no_sundays,
             'cool_reviews': reviews
-        } | beam.CoGroupByKey()
+        } | beam.CoGroupByKey() #CoGroupByKey do something like a SQL full join. In the next steps we have to remove some rows, we want a left join
           | 'join_reviews_remove_dict' >> beam.Map(join_reviews_remove_dict)
           | 'remove_reviews_no_business' >> beam.Filter(lambda x: x is not None )
           | 'gen_key_city_state_postal_code_reviews' >> beam.Map(lambda x: (gen_triplet_key(x), x)) 
